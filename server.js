@@ -24,10 +24,10 @@ connectCloudinary()
 app.use(express.json())
 app.use(cors({
   origin: [
-    'https://jeanzey.vercel.app',        // ← your frontend Vercel URL
-    'https://jeanzey-admin.vercel.app',  // ← your admin Vercel URL
-    'http://localhost:5173',             // frontend local
-    'http://localhost:5174',             // admin local
+    'https://jeanzey-frontend.vercel.app',
+    'https://jeanzey-admin.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:5174',
   ],
   credentials: true,
 }))
