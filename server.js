@@ -12,7 +12,7 @@ import passwordRouter from "./routes/passwordRoute.js";
 import addressRouter from './routes/addressRoute.js';
 import wishlistRoutes from "./routes/wishlistRoutes.js";
 import couponRouter from './routes/couponRoute.js';
-import complaintRouter from './routes/complaintRoute.js'; // ✅ NEW
+import complaintRouter from './routes/complaintRoute.js';
 
 // App Config
 const app = express()
@@ -23,12 +23,21 @@ connectCloudinary()
 // Middlewares
 app.use(express.json())
 app.use(cors({
-  origin: [
-    'https://jeanzey-frontend.vercel.app',
-    'https://jeanzey-admin.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:5174',
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, curl)
+    if (!origin) return callback(null, true);
+
+    if (
+      origin === 'https://jeanzey-frontend.vercel.app' ||
+      origin === 'https://jeanzey-admin.vercel.app' ||
+      origin.endsWith('.vercel.app') ||
+      origin.startsWith('http://localhost')
+    ) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
 }))
 
@@ -42,7 +51,7 @@ app.use("/api/user", passwordRouter);
 app.use('/api/address', addressRouter);
 app.use("/api/wishlist", wishlistRoutes);
 app.use('/api/coupon', couponRouter);
-app.use('/api/complaint', complaintRouter); // ✅ NEW
+app.use('/api/complaint', complaintRouter);
 
 app.get('/', (req, res) => {
   res.send("API Working")
