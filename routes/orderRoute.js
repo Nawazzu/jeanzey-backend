@@ -6,6 +6,7 @@ import {
   allOrders,
   userOrders,
   updateStatus,
+  updatePaymentStatus,
   verifyStripe,
   verifyRazorpay,
   cancelOrderItem
@@ -18,6 +19,7 @@ const orderRouter = express.Router();
 // Admin Features
 orderRouter.post('/list', adminAuth, allOrders);
 orderRouter.post('/status', adminAuth, updateStatus);
+orderRouter.post('/payment-status', adminAuth, updatePaymentStatus); // ✅ new
 
 // Payment Features
 orderRouter.post('/place', authUser, placeOrder);

@@ -16,7 +16,6 @@ const razorpayInstance = new razorpay({
 // -------------------- Place order (COD) --------------------
 const placeOrder = async (req, res) => {
   try {
-    // ✅ ADD couponCode and couponDiscount HERE
     const { userId, items, amount, address, priorityDelivery, couponCode, couponDiscount } = req.body;
 
     if (!userId) return res.json({ success: false, message: "User not authenticated" });
@@ -36,7 +35,6 @@ const placeOrder = async (req, res) => {
       status: "Order Placed",
       priorityDelivery: priorityDelivery || false,
       priorityDeliveryFee: priorityFee,
-      // ✅ ADD THESE TWO LINES
       couponCode: couponCode || null,
       couponDiscount: couponDiscount || 0
     };
@@ -63,7 +61,6 @@ const placeOrder = async (req, res) => {
 // -------------------- Stripe place --------------------
 const placeOrderStripe = async (req, res) => {
   try {
-    // ✅ ADD couponCode and couponDiscount HERE
     const { userId, items, amount, address, priorityDelivery, couponCode, couponDiscount } = req.body;
     const { origin } = req.headers;
 
@@ -80,7 +77,6 @@ const placeOrderStripe = async (req, res) => {
       status: "Order Placed",
       priorityDelivery: priorityDelivery || false,
       priorityDeliveryFee: priorityFee,
-      // ✅ ADD THESE TWO LINES
       couponCode: couponCode || null,
       couponDiscount: couponDiscount || 0
     };
@@ -157,7 +153,6 @@ const verifyStripe = async (req, res) => {
 // -------------------- Razorpay place --------------------
 const placeOrderRazorpay = async (req, res) => {
   try {
-    // ✅ ADD couponCode and couponDiscount HERE
     const { userId, items, amount, address, priorityDelivery, couponCode, couponDiscount } = req.body;
 
     const priorityFee = priorityDelivery ? 100 : 0;
@@ -173,7 +168,6 @@ const placeOrderRazorpay = async (req, res) => {
       status: "Order Placed",
       priorityDelivery: priorityDelivery || false,
       priorityDeliveryFee: priorityFee,
-      // ✅ ADD THESE TWO LINES
       couponCode: couponCode || null,
       couponDiscount: couponDiscount || 0
     };
@@ -271,6 +265,31 @@ const updateStatus = async (req, res) => {
   }
 };
 
+// -------------------- Admin: update payment status ✅ NEW --------------------
+const updatePaymentStatus = async (req, res) => {
+  try {
+    const { orderId, payment } = req.body;
+
+    if (!orderId || payment === undefined) {
+      return res.json({ success: false, message: "orderId and payment are required" });
+    }
+
+    const order = await orderModel.findById(orderId);
+    if (!order) return res.json({ success: false, message: "Order not found" });
+
+    order.payment = Boolean(payment);
+    await order.save();
+
+    res.json({
+      success: true,
+      message: payment ? "Payment marked as received" : "Payment marked as pending",
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
 // -------------------- Cancel specific item --------------------
 const cancelOrderItem = async (req, res) => {
   try {
@@ -322,5 +341,6 @@ export {
   allOrders,
   userOrders,
   updateStatus,
+  updatePaymentStatus,
   cancelOrderItem
 };
