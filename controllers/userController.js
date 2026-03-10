@@ -113,6 +113,10 @@ const adminLogin = async (req, res) => {
 // Route for sending welcome email on first registration
 const sendWelcomeEmail = async (req, res) => {
     const { name, email } = req.body;
+    console.log('=== WELCOME EMAIL CALLED ===');
+    console.log('To:', email, '| Name:', name);
+    console.log('EMAIL_USER set:', !!process.env.EMAIL_USER);
+    console.log('EMAIL_PASS set:', !!process.env.EMAIL_PASS);
     if (!email) return res.json({ success: false, message: 'Email required' });
 
     try {
@@ -123,6 +127,7 @@ const sendWelcomeEmail = async (req, res) => {
                 pass: process.env.EMAIL_PASS,
             },
         });
+        console.log('Transporter created, attempting send...');
 
         await transporter.sendMail({
             from: `"Jean-Zey" <${process.env.EMAIL_USER}>`,
@@ -219,9 +224,12 @@ const sendWelcomeEmail = async (req, res) => {
 </html>`,
         });
 
+        console.log('=== EMAIL SENT SUCCESSFULLY ===');
         res.json({ success: true });
     } catch (error) {
-        console.error('Welcome email error:', error);
+        console.error('=== WELCOME EMAIL ERROR ===');
+        console.error('Code:', error.code);
+        console.error('Message:', error.message);
         res.json({ success: false, message: error.message });
     }
 };
