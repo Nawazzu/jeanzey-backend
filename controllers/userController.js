@@ -129,91 +129,213 @@ const sendWelcomeEmail = async (req, res) => {
                 to: [email],
                 subject: `Welcome to Jean-Zey, ${name} ❆`,
                 html: `<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <title>Welcome to Jean-Zey</title>
 </head>
-<body style="margin:0;padding:0;background:#f4f4f0;font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#0c0c0c;">
+<body style="margin:0;padding:0;background-color:#080808;font-family:Georgia,'Times New Roman',Times,serif;">
 
-  <div style="max-width:600px;margin:40px auto;background:#ffffff;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#080808;min-height:100vh;">
+  <tr>
+    <td align="center" style="padding:60px 20px;">
 
-    <div style="height:4px;background:#0c0c0c;"></div>
+      <!-- OUTER WRAPPER -->
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
 
-    <div style="background:#0c0c0c;padding:52px 48px 44px;text-align:center;">
-      <p style="font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:#555;margin:0 0 18px;">Welcome to the Family</p>
-      <div style="font-size:44px;font-weight:600;letter-spacing:14px;text-transform:uppercase;color:#ffffff;line-height:1;margin-bottom:8px;">JEAN·ZEY</div>
-      <div style="width:32px;height:1px;background:#333;margin:18px auto;"></div>
-      <p style="font-size:16px;font-weight:300;font-style:italic;color:#888;letter-spacing:1px;margin:0;">Where identity meets fashion.</p>
-    </div>
-
-    <div style="padding:48px 48px 40px;border-left:1px solid #efefef;border-right:1px solid #efefef;">
-
-      <p style="font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:#aaa;margin:0 0 10px;">A personal note</p>
-      <h1 style="font-size:38px;font-weight:500;color:#0c0c0c;line-height:1.05;margin:0 0 28px;letter-spacing:-0.5px;">
-        Hello,<br/><span style="font-style:italic;font-weight:400;color:#aaa;">${name}.</span>
-      </h1>
-
-      <p style="font-size:14px;font-weight:300;color:#444;line-height:1.9;letter-spacing:0.2px;margin:0 0 18px;">
-        Welcome to <strong style="color:#0c0c0c;font-weight:500;">Jean-Zey</strong> — we're genuinely glad you're here. Your account has been created and you're now part of a community that believes fashion is more than clothing. It's identity. It's expression. It's culture.
-      </p>
-
-      <p style="font-size:14px;font-weight:300;color:#444;line-height:1.9;letter-spacing:0.2px;margin:0 0 32px;">
-        From this moment, every visit to Jean-Zey is yours — curated drops, exclusive pieces, and a wardrobe that speaks before you do.
-      </p>
-
-      <div style="height:1px;background:#f0f0f0;margin:0 0 28px;"></div>
-
-      <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0;margin-bottom:36px;">
+        <!-- TOP RULE -->
         <tr>
-          <td style="padding:24px 12px;text-align:center;border-right:1px solid #f0f0f0;">
-            <div style="font-size:28px;font-weight:500;color:#0c0c0c;line-height:1;margin-bottom:6px;">Free</div>
-            <div style="font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#999;">Shipping</div>
-          </td>
-          <td style="padding:24px 12px;text-align:center;border-right:1px solid #f0f0f0;">
-            <div style="font-size:28px;font-weight:500;color:#0c0c0c;line-height:1;margin-bottom:6px;">Easy</div>
-            <div style="font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#999;">Returns</div>
-          </td>
-          <td style="padding:24px 12px;text-align:center;">
-            <div style="font-size:28px;font-weight:500;color:#0c0c0c;line-height:1;margin-bottom:6px;">New</div>
-            <div style="font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#999;">Drops Weekly</div>
+          <td style="padding-bottom:0;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="height:1px;background:linear-gradient(90deg,transparent,#c9a96e,transparent);font-size:0;line-height:0;">&nbsp;</td>
+              </tr>
+            </table>
           </td>
         </tr>
+
+        <!-- HERO -->
+        <tr>
+          <td style="background-color:#0d0d0d;padding:64px 56px 52px;text-align:center;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
+            
+            <!-- eyebrow -->
+            <p style="margin:0 0 28px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;font-weight:400;letter-spacing:6px;text-transform:uppercase;color:#c9a96e;">
+              Maison Jean&#8209;Zey &nbsp;&#183;&nbsp; Est. 2024
+            </p>
+
+            <!-- wordmark -->
+            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 28px;">
+              <tr>
+                <td style="border:1px solid #2a2a2a;padding:18px 40px;">
+                  <div style="font-family:Georgia,'Times New Roman',serif;font-size:36px;font-weight:400;letter-spacing:18px;text-transform:uppercase;color:#f5f0e8;line-height:1;">
+                    JEAN&#183;ZEY
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <!-- divider ornament -->
+            <table cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td style="width:40px;height:1px;background-color:#2a2a2a;font-size:0;">&nbsp;</td>
+                <td style="padding:0 12px;font-family:Georgia,serif;font-size:14px;color:#c9a96e;line-height:1;">&#10022;</td>
+                <td style="width:40px;height:1px;background-color:#2a2a2a;font-size:0;">&nbsp;</td>
+              </tr>
+            </table>
+
+            <p style="margin:20px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:13px;font-style:italic;font-weight:400;color:#4a4a4a;letter-spacing:2px;">
+              Where identity meets fashion
+            </p>
+          </td>
+        </tr>
+
+        <!-- THIN GOLD LINE -->
+        <tr>
+          <td style="background-color:#c9a96e;height:1px;font-size:0;line-height:0;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">&nbsp;</td>
+        </tr>
+
+        <!-- GREETING BLOCK -->
+        <tr>
+          <td style="background-color:#0a0a0a;padding:56px 56px 44px;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
+            
+            <p style="margin:0 0 6px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;font-weight:400;letter-spacing:5px;text-transform:uppercase;color:#3a3a3a;">
+              A private note
+            </p>
+
+            <h1 style="margin:0 0 32px;font-family:Georgia,'Times New Roman',serif;font-size:42px;font-weight:400;color:#f5f0e8;line-height:1.1;letter-spacing:-0.5px;">
+              Dear <em style="color:#c9a96e;font-style:italic;">${name}</em>,
+            </h1>
+
+            <!-- vertical gold rule + text -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="2" style="background-color:#c9a96e;vertical-align:top;">&nbsp;</td>
+                <td style="padding:2px 0 2px 24px;">
+                  <p style="margin:0 0 20px;font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:#8a8a8a;line-height:1.85;letter-spacing:0.3px;">
+                    Your membership to <span style="color:#f5f0e8;">Jean&#8209;Zey</span> has been confirmed. You now belong to a circle of individuals who understand that what you wear is not merely clothing — it is a declaration, a language, a signature written in fabric and form.
+                  </p>
+                  <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:#8a8a8a;line-height:1.85;letter-spacing:0.3px;">
+                    Every piece in our collection is chosen with intention. Every visit to Jean&#8209;Zey is an invitation to articulate who you are — or who you are becoming.
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+
+        <!-- DIVIDER -->
+        <tr>
+          <td style="background-color:#0a0a0a;padding:0 56px;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="height:1px;background-color:#1e1e1e;font-size:0;line-height:0;">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- THREE PILLARS -->
+        <tr>
+          <td style="background-color:#0a0a0a;padding:44px 56px;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+
+                <td width="33%" style="text-align:center;padding:20px 8px;border:1px solid #1a1a1a;vertical-align:top;">
+                  <div style="font-family:Georgia,serif;font-size:22px;color:#c9a96e;margin-bottom:10px;line-height:1;">&#10022;</div>
+                  <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:#f5f0e8;margin-bottom:6px;">Free Shipping</div>
+                  <div style="font-family:Georgia,serif;font-size:11px;font-style:italic;color:#3a3a3a;">On every order</div>
+                </td>
+
+                <td width="4" style="background-color:#080808;">&nbsp;</td>
+
+                <td width="33%" style="text-align:center;padding:20px 8px;border:1px solid #1a1a1a;vertical-align:top;">
+                  <div style="font-family:Georgia,serif;font-size:22px;color:#c9a96e;margin-bottom:10px;line-height:1;">&#10022;</div>
+                  <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:#f5f0e8;margin-bottom:6px;">Easy Returns</div>
+                  <div style="font-family:Georgia,serif;font-size:11px;font-style:italic;color:#3a3a3a;">Hassle-free always</div>
+                </td>
+
+                <td width="4" style="background-color:#080808;">&nbsp;</td>
+
+                <td width="33%" style="text-align:center;padding:20px 8px;border:1px solid #1a1a1a;vertical-align:top;">
+                  <div style="font-family:Georgia,serif;font-size:22px;color:#c9a96e;margin-bottom:10px;line-height:1;">&#10022;</div>
+                  <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:#f5f0e8;margin-bottom:6px;">New Arrivals</div>
+                  <div style="font-family:Georgia,serif;font-size:11px;font-style:italic;color:#3a3a3a;">Dropped weekly</div>
+                </td>
+
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- QUOTE BLOCK -->
+        <tr>
+          <td style="background-color:#0d0d0d;padding:48px 56px;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;text-align:center;">
+            <p style="margin:0 0 6px;font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;font-style:italic;color:#2a2a2a;line-height:1;">&#8220;</p>
+            <p style="margin:0 0 6px;font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;font-style:italic;color:#6a6a6a;line-height:1.7;letter-spacing:0.5px;">
+              Style is a way to say who you are<br/>without having to speak.
+            </p>
+            <p style="margin:0 0 28px;font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;font-style:italic;color:#2a2a2a;line-height:1;">&#8221;</p>
+            <p style="margin:0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;letter-spacing:5px;text-transform:uppercase;color:#c9a96e;">The Jean&#8209;Zey Ethos</p>
+          </td>
+        </tr>
+
+        <!-- CTA -->
+        <tr>
+          <td style="background-color:#0a0a0a;padding:48px 56px 52px;text-align:center;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
+            <p style="margin:0 0 28px;font-family:Georgia,'Times New Roman',serif;font-size:14px;font-style:italic;color:#4a4a4a;letter-spacing:0.3px;">Your wardrobe is waiting to be written.</p>
+            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
+              <tr>
+                <td style="border:1px solid #c9a96e;">
+                  <a href="https://jeanzey-frontend.vercel.app/collection"
+                     style="display:inline-block;padding:16px 48px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;font-weight:400;letter-spacing:6px;text-transform:uppercase;color:#c9a96e;text-decoration:none;background-color:transparent;">
+                    Enter the Collection
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- BOTTOM GOLD LINE -->
+        <tr>
+          <td style="background-color:#c9a96e;height:1px;font-size:0;line-height:0;">&nbsp;</td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td style="background-color:#050505;padding:36px 56px;text-align:center;border-left:1px solid #111;border-right:1px solid #111;border-bottom:1px solid #111;">
+            <p style="margin:0 0 16px;font-family:Georgia,serif;font-size:18px;font-weight:400;letter-spacing:10px;text-transform:uppercase;color:#2a2a2a;">JEAN&#183;ZEY</p>
+            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 20px;">
+              <tr>
+                <td style="padding:0 12px;">
+                  <a href="https://jeanzey-frontend.vercel.app/collection" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#2a2a2a;text-decoration:none;">Shop</a>
+                </td>
+                <td style="color:#1a1a1a;font-size:8px;">&#183;</td>
+                <td style="padding:0 12px;">
+                  <a href="https://jeanzey-frontend.vercel.app/orders" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#2a2a2a;text-decoration:none;">Orders</a>
+                </td>
+                <td style="color:#1a1a1a;font-size:8px;">&#183;</td>
+                <td style="padding:0 12px;">
+                  <a href="https://jeanzey-frontend.vercel.app/about" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#2a2a2a;text-decoration:none;">About</a>
+                </td>
+              </tr>
+            </table>
+            <p style="margin:0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;font-weight:300;color:#222;line-height:1.8;letter-spacing:0.3px;">
+              You are receiving this because you joined Jean&#8209;Zey.<br/>
+              &copy; 2025 Jean&#8209;Zey. All rights reserved.
+            </p>
+          </td>
+        </tr>
+
       </table>
+      <!-- END OUTER WRAPPER -->
 
-      <div style="text-align:center;margin-bottom:8px;">
-        <a href="https://jeanzey-frontend.vercel.app/collection"
-           style="display:inline-block;background:#0c0c0c;color:#ffffff;text-decoration:none;font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;padding:18px 48px;">
-          Explore the Collection
-        </a>
-      </div>
-      <p style="font-size:11px;color:#bbb;text-align:center;margin:12px 0 32px;letter-spacing:0.3px;">Your style is waiting.</p>
-
-      <div style="background:#fafafa;border-left:2px solid #0c0c0c;padding:20px 24px;">
-        <p style="font-size:18px;font-weight:400;font-style:italic;color:#555;line-height:1.6;letter-spacing:0.3px;margin:0 0 10px;">
-          "Style is a way to say who you are without having to speak."
-        </p>
-        <p style="font-size:10px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#bbb;margin:0;">— The Jean-Zey Philosophy</p>
-      </div>
-
-    </div>
-
-    <div style="background:#0c0c0c;padding:32px 48px;text-align:center;">
-      <div style="font-size:20px;font-weight:600;letter-spacing:10px;text-transform:uppercase;color:#fff;margin-bottom:14px;">JEAN·ZEY</div>
-      <div style="margin-bottom:18px;">
-        <a href="https://jeanzey-frontend.vercel.app/collection" style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#555;text-decoration:none;margin:0 10px;">Shop</a>
-        <a href="https://jeanzey-frontend.vercel.app/orders" style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#555;text-decoration:none;margin:0 10px;">Orders</a>
-        <a href="https://jeanzey-frontend.vercel.app/about" style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#555;text-decoration:none;margin:0 10px;">About</a>
-      </div>
-      <div style="height:1px;background:#1a1a1a;margin:18px 0;"></div>
-      <p style="font-size:10px;font-weight:300;color:#444;line-height:1.8;letter-spacing:0.3px;margin:0;">
-        You're receiving this because you created an account at Jean-Zey.<br/>
-        © 2025 Jean-Zey. All rights reserved.
-      </p>
-    </div>
-
-  </div>
+    </td>
+  </tr>
+</table>
 
 </body>
 </html>`,
