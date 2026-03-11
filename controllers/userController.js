@@ -135,150 +135,181 @@ const sendWelcomeEmail = async (req, res) => {
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <title>Welcome to Jean-Zey</title>
-<style>
+<style type="text/css">
+
+  /* ── RESET ── */
+  body, table, td, p, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+  table, td { mso-table-lspace:0pt; mso-table-rspace:0pt; }
+  img { border:0; outline:none; text-decoration:none; }
+
+  /* ── LIGHT MODE (default) ── */
+  body, .email-body     { background-color:#f0efed !important; }
+  .card                 { background-color:#ffffff !important; border-color:#d8d8d8 !important; }
+  .hero-bg              { background-color:#ffffff !important; }
+  .body-section         { background-color:#fafafa !important; }
+  .quote-section        { background-color:#f5f5f5 !important; }
+  .cta-section          { background-color:#ffffff !important; }
+  .footer-section       { background-color:#f0efed !important; }
+
+  .wordmark-box         { border:1.5px solid #111111 !important; }
+  .wordmark-text        { color:#111111 !important; }
+  .eyebrow-text         { color:#999999 !important; }
+  .tagline-text         { color:#aaaaaa !important; }
+  .ornament-char        { color:#cccccc !important; }
+  .divider-bar          { background-color:#e0e0e0 !important; }
+
+  .greeting-label       { color:#aaaaaa !important; }
+  .greeting-name-dark   { color:#111111 !important; }
+  .greeting-name-italic { color:#444444 !important; }
+  .side-rule            { background-color:#cccccc !important; }
+  .body-copy            { color:#333333 !important; }
+  .body-copy-highlight  { color:#111111 !important; font-weight:600 !important; }
+
+  .section-divider      { background-color:#e8e8e8 !important; }
+
+  .pillar-cell          { border:1px solid #e0e0e0 !important; background-color:#ffffff !important; }
+  .pillar-gap           { background-color:#f0efed !important; }
+  .pillar-symbol        { color:#cccccc !important; }
+  .pillar-title         { color:#111111 !important; }
+  .pillar-sub           { color:#aaaaaa !important; }
+
+  .quote-mark           { color:#dddddd !important; }
+  .quote-body           { color:#666666 !important; }
+
+  .cta-subtext          { color:#aaaaaa !important; }
+  .cta-button           { background-color:#111111 !important; }
+  .cta-button-text      { color:#ffffff !important; }
+
+  .top-rule             { background-color:#111111 !important; }
+  .bottom-rule          { background-color:#cccccc !important; }
+  .footer-wordmark      { color:#cccccc !important; }
+  .footer-link          { color:#aaaaaa !important; }
+  .footer-sep           { color:#dddddd !important; }
+  .footer-copy          { color:#bbbbbb !important; }
+  .footer-divider       { background-color:#e8e8e8 !important; }
+
+  /* ── DARK MODE ── */
   @media (prefers-color-scheme: dark) {
-    .email-bg { background-color: #080808 !important; }
-    .outer-wrap { background-color: #080808 !important; }
-    .hero-bg { background-color: #0d0d0d !important; }
-    .body-bg { background-color: #0a0a0a !important; }
-    .quote-bg { background-color: #0d0d0d !important; }
-    .footer-bg { background-color: #050505 !important; }
-    .wordmark-td { border-color: #2a2a2a !important; }
-    .wordmark-text { color: #f5f0e8 !important; }
-    .eyebrow { color: #555 !important; }
-    .tagline { color: #3a3a3a !important; }
-    .greeting-name { color: #cccccc !important; }
-    .greeting-h1 { color: #f5f0e8 !important; }
-    .accent-rule { background-color: #333 !important; }
-    .body-text { color: #777 !important; }
-    .body-text span { color: #f5f0e8 !important; }
-    .pillar-border { border-color: #1e1e1e !important; }
-    .pillar-symbol { color: #555 !important; }
-    .pillar-title { color: #f5f0e8 !important; }
-    .pillar-sub { color: #333 !important; }
-    .quote-mark { color: #222 !important; }
-    .quote-text { color: #555 !important; }
-    .quote-attr { color: #444 !important; }
-    .cta-pre { color: #3a3a3a !important; }
-    .cta-td { border-color: #555 !important; }
-    .cta-link { color: #e0e0e0 !important; }
-    .gold-line { background-color: #2a2a2a !important; }
-    .footer-wordmark { color: #2a2a2a !important; }
-    .footer-link { color: #2a2a2a !important; }
-    .footer-text { color: #222 !important; }
-    .divider-line { background-color: #1e1e1e !important; }
-    .outer-border { border-color: #1a1a1a !important; }
-    .pillar-gap { background-color: #080808 !important; }
-    .ornament { color: #444 !important; }
+    body, .email-body   { background-color:#080808 !important; }
+    .card               { background-color:#080808 !important; border-color:#080808 !important; }
+    .hero-bg            { background-color:#111111 !important; }
+    .body-section       { background-color:#0d0d0d !important; }
+    .quote-section      { background-color:#111111 !important; }
+    .cta-section        { background-color:#0d0d0d !important; }
+    .footer-section     { background-color:#080808 !important; }
+
+    .wordmark-box       { border:1.5px solid #444444 !important; }
+    .wordmark-text      { color:#f0f0f0 !important; }
+    .eyebrow-text       { color:#555555 !important; }
+    .tagline-text       { color:#444444 !important; }
+    .ornament-char      { color:#333333 !important; }
+    .divider-bar        { background-color:#2a2a2a !important; }
+
+    .greeting-label     { color:#444444 !important; }
+    .greeting-name-dark { color:#f0f0f0 !important; }
+    .greeting-name-italic { color:#aaaaaa !important; }
+    .side-rule          { background-color:#333333 !important; }
+    .body-copy          { color:#888888 !important; }
+    .body-copy-highlight { color:#f0f0f0 !important; font-weight:600 !important; }
+
+    .section-divider    { background-color:#1e1e1e !important; }
+
+    .pillar-cell        { border:1px solid #222222 !important; background-color:#161616 !important; }
+    .pillar-gap         { background-color:#080808 !important; }
+    .pillar-symbol      { color:#333333 !important; }
+    .pillar-title       { color:#dddddd !important; }
+    .pillar-sub         { color:#444444 !important; }
+
+    .quote-mark         { color:#222222 !important; }
+    .quote-body         { color:#666666 !important; }
+
+    .cta-subtext        { color:#444444 !important; }
+    .cta-button         { background-color:#f0f0f0 !important; }
+    .cta-button-text    { color:#111111 !important; }
+
+    .top-rule           { background-color:#f0f0f0 !important; }
+    .bottom-rule        { background-color:#222222 !important; }
+    .footer-wordmark    { color:#2a2a2a !important; }
+    .footer-link        { color:#333333 !important; }
+    .footer-sep         { color:#222222 !important; }
+    .footer-copy        { color:#2a2a2a !important; }
+    .footer-divider     { background-color:#1a1a1a !important; }
   }
-  @media (prefers-color-scheme: light) {
-    .email-bg { background-color: #f2f2f0 !important; }
-    .outer-wrap { background-color: #f2f2f0 !important; }
-    .hero-bg { background-color: #ffffff !important; }
-    .body-bg { background-color: #fafafa !important; }
-    .quote-bg { background-color: #ffffff !important; }
-    .footer-bg { background-color: #f5f5f5 !important; }
-    .wordmark-td { border-color: #d0d0d0 !important; }
-    .wordmark-text { color: #0c0c0c !important; }
-    .eyebrow { color: #999 !important; }
-    .tagline { color: #bbb !important; }
-    .greeting-name { color: #555 !important; }
-    .greeting-h1 { color: #0c0c0c !important; }
-    .accent-rule { background-color: #d0d0d0 !important; }
-    .body-text { color: #555 !important; }
-    .body-text span { color: #0c0c0c !important; }
-    .pillar-border { border-color: #e0e0e0 !important; }
-    .pillar-symbol { color: #bbb !important; }
-    .pillar-title { color: #0c0c0c !important; }
-    .pillar-sub { color: #bbb !important; }
-    .quote-mark { color: #ddd !important; }
-    .quote-text { color: #888 !important; }
-    .quote-attr { color: #bbb !important; }
-    .cta-pre { color: #aaa !important; }
-    .cta-td { border-color: #0c0c0c !important; }
-    .cta-link { color: #0c0c0c !important; }
-    .gold-line { background-color: #0c0c0c !important; }
-    .footer-wordmark { color: #ccc !important; }
-    .footer-link { color: #bbb !important; }
-    .footer-text { color: #bbb !important; }
-    .divider-line { background-color: #e8e8e8 !important; }
-    .outer-border { border-color: #e0e0e0 !important; }
-    .pillar-gap { background-color: #f2f2f0 !important; }
-    .ornament { color: #ccc !important; }
-  }
+
 </style>
 </head>
-<body class="email-bg" style="margin:0;padding:0;background-color:#080808;font-family:Georgia,'Times New Roman',Times,serif;">
+<body class="email-body" style="margin:0;padding:0;background-color:#f0efed;font-family:Georgia,'Times New Roman',Times,serif;">
 
-<table class="outer-wrap" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#080808;min-height:100vh;">
+<table class="email-body" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f0efed;">
   <tr>
-    <td align="center" style="padding:60px 20px;">
+    <td align="center" style="padding:48px 16px;">
 
-      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+      <table class="card" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:580px;width:100%;background-color:#ffffff;">
 
-        <!-- TOP LINE -->
+        <!-- TOP RULE -->
         <tr>
-          <td class="gold-line" style="height:1px;background-color:#2a2a2a;font-size:0;line-height:0;">&nbsp;</td>
+          <td class="top-rule" style="height:3px;background-color:#111111;font-size:0;line-height:0;">&nbsp;</td>
         </tr>
 
         <!-- HERO -->
         <tr>
-          <td class="hero-bg outer-border" style="background-color:#0d0d0d;padding:64px 56px 52px;text-align:center;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
-            
-            <p class="eyebrow" style="margin:0 0 28px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;font-weight:400;letter-spacing:6px;text-transform:uppercase;color:#555;">
-              Jean&#8209;Zey &nbsp;&#183;&nbsp; Est. 2024
+          <td class="hero-bg" style="background-color:#ffffff;padding:52px 48px 44px;text-align:center;">
+
+            <p class="eyebrow-text" style="margin:0 0 24px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;font-weight:400;letter-spacing:5px;text-transform:uppercase;color:#999999;">
+              Jean&#8209;Zey &nbsp;&#xB7;&nbsp; Est.&nbsp;2024
             </p>
 
-            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 28px;">
+            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 24px;">
               <tr>
-                <td class="wordmark-td" style="border:1px solid #2a2a2a;padding:18px 40px;">
-                  <div class="wordmark-text" style="font-family:Georgia,'Times New Roman',serif;font-size:36px;font-weight:400;letter-spacing:18px;text-transform:uppercase;color:#f5f0e8;line-height:1;">
-                    JEAN&#183;ZEY
-                  </div>
+                <td class="wordmark-box" style="border:1.5px solid #111111;padding:14px 36px;">
+                  <span class="wordmark-text" style="font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:400;letter-spacing:14px;text-transform:uppercase;color:#111111;line-height:1;display:block;">
+                    JEAN&#xB7;ZEY
+                  </span>
                 </td>
               </tr>
             </table>
 
-            <table cellpadding="0" cellspacing="0" border="0" align="center">
+            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
               <tr>
-                <td class="divider-line" style="width:40px;height:1px;background-color:#2a2a2a;font-size:0;">&nbsp;</td>
-                <td class="ornament" style="padding:0 12px;font-family:Georgia,serif;font-size:14px;color:#444;line-height:1;">&#10022;</td>
-                <td class="divider-line" style="width:40px;height:1px;background-color:#2a2a2a;font-size:0;">&nbsp;</td>
+                <td class="divider-bar" style="width:36px;height:1px;background-color:#e0e0e0;font-size:0;">&nbsp;</td>
+                <td class="ornament-char" style="padding:0 10px;font-family:Georgia,serif;font-size:12px;color:#cccccc;line-height:1;">&#10022;</td>
+                <td class="divider-bar" style="width:36px;height:1px;background-color:#e0e0e0;font-size:0;">&nbsp;</td>
               </tr>
             </table>
 
-            <p class="tagline" style="margin:20px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:13px;font-style:italic;font-weight:400;color:#3a3a3a;letter-spacing:2px;">
+            <p class="tagline-text" style="margin:18px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:13px;font-style:italic;color:#aaaaaa;letter-spacing:1.5px;">
               Where identity meets fashion
             </p>
+
           </td>
         </tr>
 
-        <!-- ACCENT LINE -->
+        <!-- SECTION DIVIDER -->
         <tr>
-          <td class="gold-line outer-border" style="background-color:#2a2a2a;height:1px;font-size:0;line-height:0;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">&nbsp;</td>
+          <td class="section-divider" style="height:1px;background-color:#e8e8e8;font-size:0;line-height:0;">&nbsp;</td>
         </tr>
 
         <!-- GREETING -->
         <tr>
-          <td class="body-bg outer-border" style="background-color:#0a0a0a;padding:56px 56px 44px;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
-            
-            <p class="eyebrow" style="margin:0 0 6px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;font-weight:400;letter-spacing:5px;text-transform:uppercase;color:#3a3a3a;">
-              A personal note
+          <td class="body-section" style="background-color:#fafafa;padding:48px 48px 40px;">
+
+            <p class="greeting-label" style="margin:0 0 8px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:#aaaaaa;">
+              A Personal Note
             </p>
 
-            <h1 class="greeting-h1" style="margin:0 0 32px;font-family:Georgia,'Times New Roman',serif;font-size:42px;font-weight:400;color:#f5f0e8;line-height:1.1;letter-spacing:-0.5px;">
-              Dear <em class="greeting-name" style="color:#cccccc;font-style:italic;">${name}</em>,
+            <h1 class="greeting-name-dark" style="margin:0 0 28px;font-family:Georgia,'Times New Roman',serif;font-size:38px;font-weight:400;color:#111111;line-height:1.15;">
+              Dear <em class="greeting-name-italic" style="font-style:italic;color:#444444;">${name},</em>
             </h1>
 
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr>
-                <td class="accent-rule" width="2" style="background-color:#333;vertical-align:top;">&nbsp;</td>
-                <td style="padding:2px 0 2px 24px;">
-                  <p class="body-text" style="margin:0 0 20px;font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:#777;line-height:1.85;letter-spacing:0.3px;">
-                    Your membership to <span style="color:#f5f0e8;">Jean&#8209;Zey</span> has been confirmed. You now belong to a circle of individuals who understand that what you wear is not merely clothing — it is a declaration, a language, a signature written in fabric and form.
+                <td class="side-rule" width="3" style="background-color:#cccccc;vertical-align:top;font-size:0;">&nbsp;</td>
+                <td style="padding:0 0 0 20px;">
+                  <p class="body-copy" style="margin:0 0 18px;font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.9;color:#333333;letter-spacing:0.2px;">
+                    Your membership to <strong class="body-copy-highlight" style="color:#111111;font-weight:600;">Jean&#8209;Zey</strong> has been confirmed. You now belong to a circle of individuals who understand that what you wear is not merely clothing&#8202;&#8212;&#8202;it is a declaration, a language, a signature written in fabric and form.
                   </p>
-                  <p class="body-text" style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:400;color:#777;line-height:1.85;letter-spacing:0.3px;">
-                    Every piece in our collection is chosen with intention. Every visit to Jean&#8209;Zey is an invitation to articulate who you are — or who you are becoming.
+                  <p class="body-copy" style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.9;color:#333333;letter-spacing:0.2px;">
+                    Every piece in our collection is chosen with intention. Every visit to Jean&#8209;Zey is an invitation to articulate who you are&#8202;&#8212;&#8202;or who you are becoming.
                   </p>
                 </td>
               </tr>
@@ -287,65 +318,71 @@ const sendWelcomeEmail = async (req, res) => {
           </td>
         </tr>
 
-        <!-- DIVIDER -->
+        <!-- SECTION DIVIDER -->
         <tr>
-          <td class="body-bg outer-border" style="background-color:#0a0a0a;padding:0 56px;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td class="divider-line" style="height:1px;background-color:#1e1e1e;font-size:0;line-height:0;">&nbsp;</td>
-              </tr>
-            </table>
-          </td>
+          <td class="section-divider" style="height:1px;background-color:#e8e8e8;font-size:0;line-height:0;">&nbsp;</td>
         </tr>
 
         <!-- THREE PILLARS -->
         <tr>
-          <td class="body-bg outer-border" style="background-color:#0a0a0a;padding:44px 56px;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
+          <td class="body-section" style="background-color:#fafafa;padding:36px 48px;">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr>
-                <td class="pillar-border" width="33%" style="text-align:center;padding:20px 8px;border:1px solid #1a1a1a;vertical-align:top;">
-                  <div class="pillar-symbol" style="font-family:Georgia,serif;font-size:22px;color:#555;margin-bottom:10px;line-height:1;">&#10022;</div>
-                  <div class="pillar-title" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:#f5f0e8;margin-bottom:6px;">Free Shipping</div>
-                  <div class="pillar-sub" style="font-family:Georgia,serif;font-size:11px;font-style:italic;color:#3a3a3a;">On every order</div>
+                <td class="pillar-cell" style="width:32%;text-align:center;padding:22px 10px;border:1px solid #e0e0e0;background-color:#ffffff;vertical-align:top;">
+                  <div class="pillar-symbol" style="font-size:18px;color:#cccccc;margin-bottom:10px;">&#10022;</div>
+                  <div class="pillar-title" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#111111;margin-bottom:6px;">Free Shipping</div>
+                  <div class="pillar-sub" style="font-family:Georgia,serif;font-size:11px;font-style:italic;color:#aaaaaa;">On every order</div>
                 </td>
-                <td class="pillar-gap" width="4" style="background-color:#080808;">&nbsp;</td>
-                <td class="pillar-border" width="33%" style="text-align:center;padding:20px 8px;border:1px solid #1a1a1a;vertical-align:top;">
-                  <div class="pillar-symbol" style="font-family:Georgia,serif;font-size:22px;color:#555;margin-bottom:10px;line-height:1;">&#10022;</div>
-                  <div class="pillar-title" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:#f5f0e8;margin-bottom:6px;">Easy Returns</div>
-                  <div class="pillar-sub" style="font-family:Georgia,serif;font-size:11px;font-style:italic;color:#3a3a3a;">Hassle-free always</div>
+                <td class="pillar-gap" style="width:2%;background-color:#f0efed;">&nbsp;</td>
+                <td class="pillar-cell" style="width:32%;text-align:center;padding:22px 10px;border:1px solid #e0e0e0;background-color:#ffffff;vertical-align:top;">
+                  <div class="pillar-symbol" style="font-size:18px;color:#cccccc;margin-bottom:10px;">&#10022;</div>
+                  <div class="pillar-title" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#111111;margin-bottom:6px;">Easy Returns</div>
+                  <div class="pillar-sub" style="font-family:Georgia,serif;font-size:11px;font-style:italic;color:#aaaaaa;">Hassle&#8209;free always</div>
                 </td>
-                <td class="pillar-gap" width="4" style="background-color:#080808;">&nbsp;</td>
-                <td class="pillar-border" width="33%" style="text-align:center;padding:20px 8px;border:1px solid #1a1a1a;vertical-align:top;">
-                  <div class="pillar-symbol" style="font-family:Georgia,serif;font-size:22px;color:#555;margin-bottom:10px;line-height:1;">&#10022;</div>
-                  <div class="pillar-title" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:#f5f0e8;margin-bottom:6px;">New Arrivals</div>
-                  <div class="pillar-sub" style="font-family:Georgia,serif;font-size:11px;font-style:italic;color:#3a3a3a;">Dropped weekly</div>
+                <td class="pillar-gap" style="width:2%;background-color:#f0efed;">&nbsp;</td>
+                <td class="pillar-cell" style="width:32%;text-align:center;padding:22px 10px;border:1px solid #e0e0e0;background-color:#ffffff;vertical-align:top;">
+                  <div class="pillar-symbol" style="font-size:18px;color:#cccccc;margin-bottom:10px;">&#10022;</div>
+                  <div class="pillar-title" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#111111;margin-bottom:6px;">New Arrivals</div>
+                  <div class="pillar-sub" style="font-family:Georgia,serif;font-size:11px;font-style:italic;color:#aaaaaa;">Dropped weekly</div>
                 </td>
               </tr>
             </table>
           </td>
         </tr>
 
-        <!-- QUOTE BLOCK -->
+        <!-- SECTION DIVIDER -->
         <tr>
-          <td class="quote-bg outer-border" style="background-color:#0d0d0d;padding:48px 56px;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;text-align:center;">
-            <p class="quote-mark" style="margin:0 0 6px;font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;font-style:italic;color:#222;line-height:1;">&#8220;</p>
-            <p class="quote-text" style="margin:0 0 6px;font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:400;font-style:italic;color:#555;line-height:1.7;letter-spacing:0.5px;">
+          <td class="section-divider" style="height:1px;background-color:#e8e8e8;font-size:0;line-height:0;">&nbsp;</td>
+        </tr>
+
+        <!-- QUOTE -->
+        <tr>
+          <td class="quote-section" style="background-color:#f5f5f5;padding:44px 48px;text-align:center;">
+            <p class="quote-mark" style="margin:0;font-family:Georgia,serif;font-size:40px;line-height:0.8;color:#dddddd;">&#8220;</p>
+            <p class="quote-body" style="margin:16px 0;font-family:Georgia,'Times New Roman',serif;font-size:16px;font-style:italic;line-height:1.8;color:#666666;letter-spacing:0.4px;">
               Style is a way to say who you are<br/>without having to speak.
             </p>
-            <p class="quote-mark" style="margin:0 0 28px;font-family:Georgia,'Times New Roman',serif;font-size:28px;font-weight:400;font-style:italic;color:#222;line-height:1;">&#8221;</p>
+            <p class="quote-mark" style="margin:0;font-family:Georgia,serif;font-size:40px;line-height:0.8;color:#dddddd;">&#8221;</p>
           </td>
+        </tr>
+
+        <!-- SECTION DIVIDER -->
+        <tr>
+          <td class="section-divider" style="height:1px;background-color:#e8e8e8;font-size:0;line-height:0;">&nbsp;</td>
         </tr>
 
         <!-- CTA -->
         <tr>
-          <td class="body-bg outer-border" style="background-color:#0a0a0a;padding:48px 56px 52px;text-align:center;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
-            <p class="cta-pre" style="margin:0 0 28px;font-family:Georgia,'Times New Roman',serif;font-size:14px;font-style:italic;color:#3a3a3a;letter-spacing:0.3px;">Your wardrobe is waiting to be written.</p>
+          <td class="cta-section" style="background-color:#ffffff;padding:44px 48px 52px;text-align:center;">
+            <p class="cta-subtext" style="margin:0 0 28px;font-family:Georgia,'Times New Roman',serif;font-size:14px;font-style:italic;color:#aaaaaa;">
+              Your wardrobe is waiting to be written.
+            </p>
             <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto;">
               <tr>
-                <td class="cta-td" style="border:1px solid #555;">
-                  <a class="cta-link" href="https://jeanzey-frontend.vercel.app/collection"
-                     style="display:inline-block;padding:16px 48px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;font-weight:400;letter-spacing:6px;text-transform:uppercase;color:#e0e0e0;text-decoration:none;background-color:transparent;">
-                    Enter the Collection
+                <td class="cta-button" style="background-color:#111111;border-radius:0;">
+                  <a href="https://jeanzey-frontend.vercel.app/collection" target="_blank"
+                     style="display:inline-block;padding:16px 52px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#ffffff;text-decoration:none;mso-padding-alt:0;">
+                    <span class="cta-button-text" style="color:#ffffff;">Enter the Collection</span>
                   </a>
                 </td>
               </tr>
@@ -353,31 +390,28 @@ const sendWelcomeEmail = async (req, res) => {
           </td>
         </tr>
 
-        <!-- BOTTOM LINE -->
+        <!-- BOTTOM RULE -->
         <tr>
-          <td class="gold-line" style="background-color:#2a2a2a;height:1px;font-size:0;line-height:0;">&nbsp;</td>
+          <td class="bottom-rule" style="height:1px;background-color:#cccccc;font-size:0;line-height:0;">&nbsp;</td>
         </tr>
 
         <!-- FOOTER -->
         <tr>
-          <td class="footer-bg outer-border" style="background-color:#050505;padding:36px 56px;text-align:center;border-left:1px solid #111;border-right:1px solid #111;border-bottom:1px solid #111;">
-            <p class="footer-wordmark" style="margin:0 0 16px;font-family:Georgia,serif;font-size:18px;font-weight:400;letter-spacing:10px;text-transform:uppercase;color:#2a2a2a;">JEAN&#183;ZEY</p>
-            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 20px;">
+          <td class="footer-section" style="background-color:#f0efed;padding:32px 48px;text-align:center;">
+            <p class="footer-wordmark" style="margin:0 0 14px;font-family:Georgia,serif;font-size:16px;letter-spacing:8px;text-transform:uppercase;color:#cccccc;">JEAN&#xB7;ZEY</p>
+            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 18px;">
               <tr>
-                <td style="padding:0 12px;">
-                  <a class="footer-link" href="https://jeanzey-frontend.vercel.app/collection" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#2a2a2a;text-decoration:none;">Shop</a>
-                </td>
-                <td class="footer-link" style="color:#1a1a1a;font-size:8px;">&#183;</td>
-                <td style="padding:0 12px;">
-                  <a class="footer-link" href="https://jeanzey-frontend.vercel.app/orders" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#2a2a2a;text-decoration:none;">Orders</a>
-                </td>
-                <td class="footer-link" style="color:#1a1a1a;font-size:8px;">&#183;</td>
-                <td style="padding:0 12px;">
-                  <a class="footer-link" href="https://jeanzey-frontend.vercel.app/about" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#2a2a2a;text-decoration:none;">About</a>
-                </td>
+                <td><a class="footer-link" href="https://jeanzey-frontend.vercel.app/collection" target="_blank" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#aaaaaa;text-decoration:none;">Shop</a></td>
+                <td class="footer-sep" style="padding:0 10px;color:#dddddd;font-size:10px;">&#xB7;</td>
+                <td><a class="footer-link" href="https://jeanzey-frontend.vercel.app/orders" target="_blank" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#aaaaaa;text-decoration:none;">Orders</a></td>
+                <td class="footer-sep" style="padding:0 10px;color:#dddddd;font-size:10px;">&#xB7;</td>
+                <td><a class="footer-link" href="https://jeanzey-frontend.vercel.app/about" target="_blank" style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#aaaaaa;text-decoration:none;">About</a></td>
               </tr>
             </table>
-            <p class="footer-text" style="margin:0;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:9px;font-weight:300;color:#222;line-height:1.8;letter-spacing:0.3px;">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:16px;">
+              <tr><td class="footer-divider" style="height:1px;background-color:#e8e8e8;font-size:0;">&nbsp;</td></tr>
+            </table>
+            <p class="footer-copy" style="margin:0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:9px;color:#bbbbbb;line-height:1.8;letter-spacing:0.3px;">
               You are receiving this because you joined Jean&#8209;Zey.<br/>
               &copy; 2025 Jean&#8209;Zey. All rights reserved.
             </p>
