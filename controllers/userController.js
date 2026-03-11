@@ -2,7 +2,6 @@ import validator from "validator";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 import userModel from "../models/userModel.js";
-import nodemailer from "nodemailer";
 
 
 const createToken = (id) => {
@@ -115,25 +114,21 @@ const sendWelcomeEmail = async (req, res) => {
     const { name, email } = req.body;
     console.log('=== WELCOME EMAIL CALLED ===');
     console.log('To:', email, '| Name:', name);
-    console.log('EMAIL_USER set:', !!process.env.EMAIL_USER);
-    console.log('EMAIL_PASS set:', !!process.env.EMAIL_PASS);
+    console.log('RESEND_API_KEY set:', !!process.env.RESEND_API_KEY);
     if (!email) return res.json({ success: false, message: 'Email required' });
 
     try {
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
+        const response = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+                'Content-Type': 'application/json',
             },
-        });
-        console.log('Transporter created, attempting send...');
-
-        await transporter.sendMail({
-            from: `"Jean-Zey" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: `Welcome to Jean-Zey, ${name} ✦`,
-            html: `<!DOCTYPE html>
+            body: JSON.stringify({
+                from: 'Jean-Zey <onboarding@resend.dev>',
+                to: [email],
+                subject: `Welcome to Jean-Zey, ${name} ❆`,
+                html: `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -222,14 +217,20 @@ const sendWelcomeEmail = async (req, res) => {
 
 </body>
 </html>`,
+            }),
         });
 
-        console.log('=== EMAIL SENT SUCCESSFULLY ===');
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error('=== RESEND ERROR ===', JSON.stringify(data));
+            return res.json({ success: false, message: data.message || 'Email failed' });
+        }
+
+        console.log('=== EMAIL SENT SUCCESSFULLY === ID:', data.id);
         res.json({ success: true });
     } catch (error) {
-        console.error('=== WELCOME EMAIL ERROR ===');
-        console.error('Code:', error.code);
-        console.error('Message:', error.message);
+        console.error('=== WELCOME EMAIL ERROR ===', error.message);
         res.json({ success: false, message: error.message });
     }
 };
