@@ -76,6 +76,7 @@ import couponRouter from './routes/couponRoute.js';
 import complaintRouter from './routes/complaintRoute.js';
 import jwt from 'jsonwebtoken';
 import userModel from './models/userModel.js';
+import statsRouter from "./routes/statsRoute.js";
 
 // App Config
 const app = express()
@@ -170,6 +171,7 @@ app.use('/api/address', addressRouter);
 app.use("/api/wishlist", wishlistRouter);
 app.use('/api/coupon', couponRouter);
 app.use('/api/complaint', complaintRouter);
+app.use("/api/stats", statsRouter);
 
 app.get('/', (req, res) => {
   res.send("API Working")
