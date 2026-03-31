@@ -36,4 +36,6 @@ orderRouter.post('/verifyRazorpay', authUser, verifyRazorpay);
 // Cancel specific order item (user)
 orderRouter.post('/cancel-item', authUser, cancelOrderItem);
 
+orderRouter.post('/track');
+
 export default orderRouter;

@@ -41,7 +41,8 @@ const placeOrder = async (req, res) => {
 
     const newOrder = new orderModel(orderData);
     await newOrder.save();
-
+// Inside the emailParams or the HTML template string, add this line:
+track_link: `https://jeanzey-frontend.vercel.app/track-order?orderId=${orderDetails.order_id}`
     await reduceStock(items);
     await userModel.findByIdAndUpdate(userId, { cartData: {} });
 
@@ -329,6 +330,21 @@ const cancelOrderItem = async (req, res) => {
   } catch (error) {
     console.error("Cancel order item error:", error);
     return res.json({ success: false, message: "Server error" });
+  }
+};
+
+
+const trackOrder = async (req, res) => {
+  try {
+    const { orderId } = req.body;
+    if (!orderId) return res.json({ success: false, message: "Order ID required" });
+    const order = await orderModel.findById(orderId.trim()).select(
+      'items address amount status payment date priorityDelivery paymentMethod couponDiscount couponCode'
+    );
+    if (!order) return res.json({ success: false, message: "Order not found. Please check your Order ID." });
+    res.json({ success: true, order });
+  } catch (error) {
+    res.json({ success: false, message: "Invalid Order ID format." });
   }
 };
 
