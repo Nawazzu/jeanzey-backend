@@ -39,12 +39,15 @@ const placeOrder = async (req, res) => {
       couponDiscount: couponDiscount || 0
     };
 
-    const newOrder = new orderModel(orderData);
-    await newOrder.save();
-// Inside the emailParams or the HTML template string, add this line:
-track_link: `https://jeanzey-frontend.vercel.app/track-order?orderId=${orderDetails.order_id}`
-    await reduceStock(items);
-    await userModel.findByIdAndUpdate(userId, { cartData: {} });
+ const newOrder = new orderModel(orderData);
+await newOrder.save();
+
+const orderDetails = newOrder;
+
+const track_link = `https://jeanzey-frontend.vercel.app/track-order?orderId=${orderDetails._id}`;
+
+await reduceStock(items);
+await userModel.findByIdAndUpdate(userId, { cartData: {} });
 
     res.json({
       success: true,
