@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  trackOrder,
   placeOrder,
   placeOrderStripe,
   placeOrderRazorpay,
@@ -36,6 +37,6 @@ orderRouter.post('/verifyRazorpay', authUser, verifyRazorpay);
 // Cancel specific order item (user)
 orderRouter.post('/cancel-item', authUser, cancelOrderItem);
 
-orderRouter.post('/track');
+orderRouter.post('/track', trackOrder);
 
 export default orderRouter;

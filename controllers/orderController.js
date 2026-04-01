@@ -41,11 +41,6 @@ const placeOrder = async (req, res) => {
 
  const newOrder = new orderModel(orderData);
 await newOrder.save();
-
-const orderDetails = newOrder;
-
-const track_link = `https://jeanzey-frontend.vercel.app/track-order?orderId=${orderDetails._id}`;
-
 await reduceStock(items);
 await userModel.findByIdAndUpdate(userId, { cartData: {} });
 
@@ -361,5 +356,6 @@ export {
   userOrders,
   updateStatus,
   updatePaymentStatus,
-  cancelOrderItem
+  cancelOrderItem,
+   trackOrder 
 };
