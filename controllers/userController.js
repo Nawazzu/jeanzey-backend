@@ -118,7 +118,7 @@ const sendWelcomeEmail = async (req, res) => {
     if (!email) return res.json({ success: false, message: 'Email required' });
 
     try {
-        const response = await fetch('https://api.resend.com/emails', {
+       fetch('https://api.resend.com/emails',  {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
@@ -426,22 +426,30 @@ const sendWelcomeEmail = async (req, res) => {
 
 </body>
 </html>`,
-            }),
-        });
+  }),
+});
 
-        const data = await response.json();
-
-        if (!response.ok) {
-            console.error('=== RESEND ERROR ===', JSON.stringify(data));
-            return res.json({ success: false, message: data.message || 'Email failed' });
-        }
-
-        console.log('=== EMAIL SENT SUCCESSFULLY === ID:', data.id);
-        res.json({ success: true });
-    } catch (error) {
-        console.error('=== WELCOME EMAIL ERROR ===', error.message);
-        res.json({ success: false, message: error.message });
+// 🔥 make email async (non-blocking)
+response
+  .then(res => res.json())
+  .then(data => {
+    if (!response.ok) {
+      console.error('=== RESEND ERROR ===', JSON.stringify(data));
+    } else {
+      console.log('=== EMAIL SENT SUCCESSFULLY === ID:', data.id);
     }
+  })
+  .catch(err => {
+    console.error('=== EMAIL ERROR ===', err.message);
+  });
+
+// ✅ ALWAYS return success immediately (prevents 503)
+res.json({ success: true });
+
+} catch (error) {
+  console.error('=== WELCOME EMAIL ERROR ===', error.message);
+  res.json({ success: false, message: error.message });
+}
 };
 
 
