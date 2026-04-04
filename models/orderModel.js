@@ -26,7 +26,9 @@ const orderSchema = new mongoose.Schema({
   priorityDeliveryFee: { type: Number, default: 0 },
   // ✅ ADD THESE TWO LINES FOR COUPON SUPPORT
   couponCode: { type: String, default: null },
-  couponDiscount: { type: Number, default: 0 }
+  couponDiscount: { type: Number, default: 0 },
+  // ✅ Short readable order ID e.g. JZ-260318-4A2F
+  orderId: { type: String, unique: true, sparse: true }
 });
 
 const orderModel = mongoose.models.order || mongoose.model('order', orderSchema);

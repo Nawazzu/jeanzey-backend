@@ -13,6 +13,16 @@ const razorpayInstance = new razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
+// -------------------- Short Order ID generator --------------------
+const generateOrderId = (mongoId) => {
+  const now = new Date();
+  const yy = String(now.getFullYear()).slice(2);
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const dd = String(now.getDate()).padStart(2, '0');
+  const suffix = mongoId.toString().slice(-4).toUpperCase();
+  return `JZ-${yy}${mm}${dd}-${suffix}`;
+};
+
 // -------------------- Place order (COD) --------------------
 const placeOrder = async (req, res) => {
   try {
@@ -39,15 +49,20 @@ const placeOrder = async (req, res) => {
       couponDiscount: couponDiscount || 0
     };
 
- const newOrder = new orderModel(orderData);
-await newOrder.save();
-await reduceStock(items);
-await userModel.findByIdAndUpdate(userId, { cartData: {} });
+    const newOrder = new orderModel(orderData);
+    await newOrder.save();
+    // Generate and save short orderId
+    newOrder.orderId = generateOrderId(newOrder._id);
+    await newOrder.save();
+
+    await reduceStock(items);
+    await userModel.findByIdAndUpdate(userId, { cartData: {} });
 
     res.json({
       success: true,
       message: "Order Placed Successfully",
       order_id: newOrder._id,
+      short_order_id: newOrder.orderId,
       order: newOrder
     });
 
@@ -81,6 +96,9 @@ const placeOrderStripe = async (req, res) => {
     };
 
     const newOrder = new orderModel(orderData);
+    await newOrder.save();
+    // Generate and save short orderId
+    newOrder.orderId = generateOrderId(newOrder._id);
     await newOrder.save();
 
     const line_items = items.map((item) => ({
@@ -172,6 +190,9 @@ const placeOrderRazorpay = async (req, res) => {
     };
 
     const newOrder = new orderModel(orderData);
+    await newOrder.save();
+    // Generate and save short orderId
+    newOrder.orderId = generateOrderId(newOrder._id);
     await newOrder.save();
 
     const options = {
@@ -331,14 +352,22 @@ const cancelOrderItem = async (req, res) => {
   }
 };
 
-
+// -------------------- Track order (public) --------------------
 const trackOrder = async (req, res) => {
   try {
     const { orderId } = req.body;
     if (!orderId) return res.json({ success: false, message: "Order ID required" });
-    const order = await orderModel.findById(orderId.trim()).select(
-      'items address amount status payment date priorityDelivery paymentMethod couponDiscount couponCode'
-    );
+
+    const selectFields = 'items address amount status payment date priorityDelivery paymentMethod couponDiscount couponCode orderId';
+
+    // Search by short orderId first (e.g. JZ-260318-4A2F)
+    let order = await orderModel.findOne({ orderId: orderId.trim() }).select(selectFields);
+
+    // Fall back to MongoDB _id for old orders
+    if (!order) {
+      order = await orderModel.findById(orderId.trim()).select(selectFields).catch(() => null);
+    }
+
     if (!order) return res.json({ success: false, message: "Order not found. Please check your Order ID." });
     res.json({ success: true, order });
   } catch (error) {
@@ -357,5 +386,5 @@ export {
   updateStatus,
   updatePaymentStatus,
   cancelOrderItem,
-   trackOrder 
+  trackOrder
 };
